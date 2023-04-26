@@ -1,0 +1,54 @@
+﻿@using RealStateApp.Core.Application.Enums;
+@using Microsoft.AspNetCore.Http
+@using RealStateApp.Core.Application.Dtos.Account
+@using RealStateApp.Core.Application.Helpers;
+@using RealStateApp.Core.Application.ViewModels.User;
+@inject IHttpContextAccessor httpContextAccessor
+@{
+    var User = httpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
+}
+
+@{
+    ViewData["Title"] = "Confirm";
+}
+
+@using RealStateApp.Core.Application.ViewModels.User;
+
+@model string;
+
+
+
+<div class="container-fluid">
+    <div class="row"> 
+        <div class="col-6 offset-3">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-light">
+                    <h4>Login </h4>
+                </div>
+                <div class="card-body">
+                            <div class="alert alert-primary alert-dimissible fade show" role="alert">
+                        @if (User.RoleList.Any(r => r.Equals(EnumRoles.Cliente.ToString())))
+                        {
+
+                        <h2> No tiene permiso para entrar a esta vista - <a class="btn-primary" asp-controller="Client" asp-action="Index">User Index</a></h2>
+                            
+                        }
+                        else if (User.RoleList.Any(r => r.Equals(EnumRoles.Agente.ToString())))
+                        {
+                            <h2> No tiene permiso para entrar a esta vista - <a class="btn-primary" asp-controller="Agent" asp-action="Index">Agente Index</a></h2>
+
+                        }
+                        else if (User.RoleList.Any(r => r.Equals(EnumRoles.Administrador.ToString())))
+                        {
+                            <h2> No tiene permiso para entrar a esta vista - <a class="btn-primary" asp-controller="Admin" asp-action="Index">Admin Index</a></h2>
+
+                        }
+                        <button type="button" class="btn-close" data-bs-dimiss="alert" aria-label="Close"></button>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

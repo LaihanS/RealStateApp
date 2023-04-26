@@ -1,0 +1,63 @@
+﻿@model List<RealStateApp.Core.Application.ViewModels.User.UserViewModel>
+@using RealStateApp.Core.Application.Enums;
+
+@{
+    ViewData["Title"] = "Mantenimiento Desarrolladores";
+}
+
+<div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Mantenimiento Developers</h1>
+        <p>
+            <a asp-controller="Admin" asp-action="Create" class="btn btn-primary my-2">Agregar Nuevo Desarrollador</a>
+        </p>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        @if (Model.Count == 0 || Model == null)
+        {
+            <h2>No hay Usuarios</h2>
+        }
+        else
+        {
+            @foreach (RealStateApp.Core.Application.ViewModels.User.UserViewModel item in Model)
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h4>@item.FirstName</h4>
+                            <p>Apellido: @item.LastName</p>
+                            <p>Correo: @item.Email</p>
+                            <p>Cédula: @item.Cedula</p>
+                            <p>Usuario: @item.UserName</p>
+                            <p>Activo: @(item.EmailConfirmed? "Sí": "No") </p>
+                            <p>Roles: @(string.Join(", ", item.RoleList)) </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+
+                                    <a asp-controller="Admin" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger mx-2">Edit</a>
+                                   
+                                    @if (!item.EmailConfirmed)
+                                    {
+                                        <a asp-controller="Admin" asp-action="ActivateOrInactivate" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger mx-2">Activar</a>
+                                    }else
+                                    {
+                                        <a asp-controller="Admin" asp-action="ActivateOrInactivate" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger mx-2">Desactivar</a>
+                                    }
+
+                                    <a asp-controller="Admin" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger mx-2">Borrar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>
+
+

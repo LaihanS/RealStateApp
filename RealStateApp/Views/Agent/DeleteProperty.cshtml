@@ -1,0 +1,23 @@
+﻿@model RealStateApp.Core.Application.ViewModels.Propiedades.SavePropiedadViewModel
+@{
+    ViewData["Title"] = "Eliminar Propiedad";
+}
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header bg-dark text-light">
+                <h4>Esta seguro que desea la mejora @Model.TiposPropiedad? </h4>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-controller="Agent" asp-action="Delete">
+
+                    <input type="hidden" asp-for="id" />
+
+                    <button type="submit" class="btn btn-primary">Eliminar</button>
+                    <a asp-controller="Agent" asp-action="Index" class="btn btn-warning">Volver atras</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

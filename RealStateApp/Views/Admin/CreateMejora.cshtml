@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Add Mejora";
+}
+
+@using RealStateApp.Core.Application.Enums;
+@using RealStateApp.Core.Application.ViewModels.Mejora;
+@model SaveMejoraViewModel;
+
+@{
+    bool EditMode = Model.id == 0  ? false : true;
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-light">
+                    <h4> @(EditMode ? "Editar" : "Registrar") usuario</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-body">
+                        @Html.ValidationSummary(false, "", new{@class = "text-danger" })
+                        @if (Model.HasError)
+                        {
+                            <div class="alert alert-danger alert-dimissible fade show" role="alert">
+                                <p>@Model.ErrorDetails</p>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dimiss="alert" aria-label="Close"></button>
+
+                        }
+                        <form id="Formulario" enctype="multipart/form-data" method="post" asp-controller="Admin" asp-action="@(EditMode?"EditMejora":"CreateMejora")">
+
+                            <div class="mb-3">
+                                <label for="NameText" class="form-label">Nombre</label>
+                                <input asp-for="Nombre" class="form-control" id="NameText">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="usernameText" class="form-label">Descripción: </label>
+                                <input asp-for="Descripcion" class="form-control" id="usernameText">
+                            </div>
+  
+                            <input type="hidden" asp-for="id">
+
+                            <button type="submit" class="btn btn-primary">Dale</button>
+                            <a asp-controller="Admin" asp-action="VentaTypeMantainment" class="btn btn-warning">Atrás</a>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

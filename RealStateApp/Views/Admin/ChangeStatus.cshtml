@@ -1,0 +1,25 @@
+﻿@model RealStateApp.Core.Application.ViewModels.User.SaveUserViewModel
+@{
+    ViewData["Title"] = "Change Status";
+    bool isconfirmed = Model.EmailConfirmed ? true : false;
+}
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header bg-dark text-light">
+ 
+                <h4>Esta seguro que desea @(isconfirmed? "desactivar": "activar") la cuenta del usuario @Model.FirstName? </h4>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-controller="Admin" asp-action="ActivateOrInactivate">
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <button type="submit" class="btn btn-primary">@(isconfirmed ? "Desactivar" : "Activar")</button>
+                    <a asp-controller="Admin" asp-action="Index" class="btn btn-warning">Volver atras</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

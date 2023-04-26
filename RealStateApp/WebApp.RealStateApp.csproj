@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\%2a%2a" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RealStateApp.Core.Application\RealStateApp.Core.Application.csproj" />
+    <ProjectReference Include="..\RealStateApp.Core.Domain\RealStateApp.Core.Domain.csproj" />
+    <ProjectReference Include="..\RealStateApp.Infrastructure.Identity\RealStateApp.Infrastructure.Identity.csproj" />
+    <ProjectReference Include="..\RealStateApp.Infrastructure.Persistence\RealStateApp.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\RealStateApp.Infrastructure.Shared\RealStateApp.Infrastructure.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\Usuario\" />
+    <Folder Include="wwwroot\Images\Post\" />
+    <Folder Include="wwwroot\Images\Propiedad\" />
+    <Folder Include="wwwroot\Images\Propiedad\14\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Agent\PostImages.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

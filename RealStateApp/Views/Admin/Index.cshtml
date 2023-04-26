@@ -1,0 +1,65 @@
+﻿@model RealStateApp.Core.Application.ViewModels.Home.HomeViewModel
+@using RealStateApp.Core.Application.Enums;
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Home</h1>
+        <p>
+
+        </p>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4>Cantidad de propiedades</h4>
+                    <p>Propiedades: @Model.Propiedades.Count() </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4>Clientes activos e inactivos</h4>
+                    <p>Activos: @Model.ClientesActivos.Count() </p>
+                    <p>Inctivos: @Model.ClientesInactivos.Count() </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4>Agentes activos e inactivos</h4>
+                    <p>Activos: @Model.AgentesActivos.Count() </p>
+                    <p>Inctivos: @Model.AgentesInactivos.Count() </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4>Desarrolladores activos e inactivos</h4>
+                    <p>Activos: @Model.DesarrolladoresActivos.Count() </p>
+                    <p>Inctivos: @Model.DesarrolladoresInactivos.Count() </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+

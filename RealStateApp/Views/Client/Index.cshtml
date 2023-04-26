@@ -1,0 +1,117 @@
+﻿@model List<RealStateApp.Core.Application.ViewModels.Propiedades.PropiedadViewModel>
+@using RealStateApp.Core.Application.Enums;
+@using RealStateApp.Core.Application.ViewModels.PropertyType;
+
+@{
+    ViewData["Title"] = "Mantenimiento Propiedades";
+}
+
+<div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Propiedades</h1>
+        <p>
+        </p>
+            <form method="post" asp-controller="Client" asp-action="Index">
+
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" value="null" type="radio" name="PropiedadTipoID" id="region-all">
+                    <label class="form-check-label" for="region-all">Tolavaina</label>
+                </div>
+            </div>
+
+            @foreach (PropertypeViewModel item in ViewBag.PropiedadesTipos)
+            {
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" value="@item.id" type="radio" name="PropiedadTipoID" id="region-@item.id">
+                        <label class="form-check-label" for="region-@item.id">@item.Nombre</label>
+                    </div>
+                </div>
+            }
+
+            <div class="mb-3">
+                <label for="Doctor" class="form-label">Precio Max</label>
+                <select name="PrecMax" asp-items="@(new SelectList(ViewBag.ProperPrecios, "Precio"))" class="form-control" id="Doctor">
+                    <option>Seleccione una opción</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="Doctor" class="form-label">Precio Min</label>
+                <select name="PrecMin" asp-items="@(new SelectList(ViewBag.ProperPrecios, "Precio"))" class="form-control" id="Doctor">
+                    <option>Seleccione una opción</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="Doctor" class="form-label">Cantidad de baños</label>
+                <select name="BañoCantidad" asp-items="@(new SelectList(ViewBag.Baños, "Baños"))" class="form-control" id="Doctor">
+                    <option>Seleccione una opción</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="Doctor" class="form-label">Cantidad de habitaciones</label>
+                <select name="HabiCantidad" asp-items="@(new SelectList(ViewBag.Habitaciones, "Precio"))" class="form-control" id="Doctor">
+                    <option>Seleccione una opción</option>
+                </select>
+            </div>
+
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </form>
+
+        </p>
+    </div>
+    <div class="col-lg-6 col-md-8 mx-auto">
+        <form method="post" asp-controller="Client" asp-action="Index">
+
+            <input type="search" class="form-control ds-input" id="search-input" placeholder="Buscar Propiedad Por Código..."
+                   aria-label="Search for..." name="PropCodigo">
+
+            <button type="submit" class="btn btn-primary">Dale</button>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="container-fluid">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        @if (Model.Count == 0 || Model == null)
+        {
+            <h2>No hay Usuarios</h2>
+        }
+        else
+        {
+            @foreach (RealStateApp.Core.Application.ViewModels.Propiedades.PropiedadViewModel item in Model)
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                         @if (item.Imagenes.Count() != 0)
+                        {
+                        <img src="@item.Imagenes.Where(img => img.id != null).First().ImagePath" class="card-img-top" alt="">
+                        }
+                        <div class="card-body">
+                            <h4>@item.PropiedadType.Nombre</h4>
+                            <p>Código: @item.UnicDigitSequence</p>
+                            <p>Valor: @item.Precio</p>
+                            <p>Baños: @item.QuantityBaños</p>
+                            <p>Habitaciones: @item.QuantityHabitaciones</p>
+                            <p>Tamaño: @item.MtsTerrain</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a asp-controller="Client" asp-action="AddFavorite" asp-route-id="@item.id" class="btn btn-sm btn-outline-danger mx-2">Marcar Como Favorita</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>
+
+

@@ -1,0 +1,10 @@
+﻿using RealStateApp.Core.Application.Dtos.ImportantDto;
+using RealStateApp.Core.Domain.Entities;
+
+namespace RealStateApp.Core.Application.IRepositories
+{
+    public interface IPropertyTypeRepository: IGenericAppRepository<PropertyType>
+    {
+        Task<UserDto> GetUserAccount(string iduser);
+    }
+}

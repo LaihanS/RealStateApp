@@ -1,0 +1,50 @@
+﻿@model List<RealStateApp.Core.Application.ViewModels.PropertyImages.PropertyImagesViewModel>
+@using RealStateApp.Core.Application.Enums;
+
+@{
+    ViewData["Title"] = "Post Images";
+}
+
+<div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Post Images</h1>
+        <p>
+            <a asp-controller="Agent" asp-action="CreateImage" asp-route-idprop="@ViewBag.PropiedadID" class="btn btn-primary my-2">Agregar Nueva Propiedad</a>
+        </p>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        @if (Model.Count == 0 || Model == null)
+        {
+            <h2>No hay Usuarios</h2>
+        }
+        else
+        {
+            @foreach (RealStateApp.Core.Application.ViewModels.PropertyImages.PropertyImagesViewModel item in Model)
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="@item.ImagePath" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h4>Propiedad ID: @item.IdPropiedad</h4>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+
+                                    <a asp-controller="Agent" asp-action="EditImage" asp-route-id="@item.id" class="btn btn-sm btn-outline-danger mx-2">Edit</a>
+
+                                    <a asp-controller="Agent" asp-action="DeleteImage" asp-route-id="@item.id" class="btn btn-sm btn-outline-danger mx-2">Borrar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>
+
+

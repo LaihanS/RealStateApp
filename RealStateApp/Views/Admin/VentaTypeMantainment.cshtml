@@ -1,0 +1,51 @@
+﻿@model List<RealStateApp.Core.Application.ViewModels.Venta.VentaTypeViewModel>
+@using RealStateApp.Core.Application.Enums;
+
+@{
+    ViewData["Title"] = "Mantenimiento Ventas";
+}
+
+<div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Mantenimiento De Tipos de Venta</h1>
+        <p>
+            <a asp-controller="Admin" asp-action="CreateVenta" class="btn btn-primary my-2">Agregar Nuevo Tipo de Venta</a>
+        </p>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        @if (Model.Count == 0 || Model == null)
+        {
+            <h2>No hay Ventas</h2>
+        }
+        else
+        {
+            @foreach (RealStateApp.Core.Application.ViewModels.Venta.VentaTypeViewModel item in Model)
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h4>@item.Nombre</h4>
+                            <p>Descripción: @item.Descripcion</p>
+                            <p>Num. Propiedades: @item.Propiedades.Count()</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+
+                                    <a asp-controller="Admin" asp-action="EditVenta" asp-route-id="@item.id" class="btn btn-sm btn-outline-danger mx-2">Edit</a>
+
+                                    <a asp-controller="Admin" asp-action="DeleteVenta" asp-route-id="@item.id" class="btn btn-sm btn-outline-danger mx-2">Borrar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>
+
+

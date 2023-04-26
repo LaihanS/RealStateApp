@@ -1,0 +1,44 @@
+﻿@model RealStateApp.Core.Application.ViewModels.User.UserViewModel;
+@using RealStateApp.Core.Application.Enums;
+@using RealStateApp.Core.Application.ViewModels.PropertyImages;
+
+@{
+    ViewData["Title"] = "Detalles del Agente";
+}
+
+
+<div class="card text-center">
+  <div class="card-header">
+    Detalles de la propiedaad
+  </div>
+    <div class="slideshow">
+        <ul class="slides">
+                <li class="slide is-active">
+                    <div class="cover"
+                     style="background-image: url(@Model.ImagePath);"></div>
+                </li>
+        </ul>
+        <div class="arrows">
+            <button class="arrow arrow-prev">
+                <span></span>
+            </button>
+            <button class="arrow arrow-next">
+                <span></span>
+            </button>
+        </div>
+    </div>
+    <main>
+
+    </main>
+    <footer>
+    </footer>
+
+  <div class="card-footer text-muted">
+        <h4>@Model.FirstName</h4>
+        <p>Apellido: @Model.LastName</p>
+        <p>Correo: @Model.Email</p>
+        <p>Cédula: @Model.Cedula</p>
+        <p>Usuario: @Model.UserName</p>
+    </div>
+
+

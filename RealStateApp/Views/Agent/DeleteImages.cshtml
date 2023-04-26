@@ -1,0 +1,23 @@
+﻿@model RealStateApp.Core.Application.ViewModels.PropertyImages.SavePropertyImagesViewModel
+@{
+    ViewData["Title"] = "Eliminar Imagen";
+}
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header bg-dark text-light">
+                <h4>Esta seguro que desea la imagen @Model.id? </h4>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-controller="Agent" asp-action="DeleteImage">
+
+                    <input type="hidden" asp-for="id" />
+
+                    <button type="submit" class="btn btn-primary">Eliminar</button>
+                    <a asp-controller="Agent" asp-action="Index" class="btn btn-warning">Volver atras</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

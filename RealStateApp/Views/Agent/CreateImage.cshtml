@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Registro Admin";
+}
+
+@using RealStateApp.Core.Application.Enums;
+@using RealStateApp.Core.Application.ViewModels.PropertyImages;
+@model SavePropertyImagesViewModel;
+
+@using RealStateApp.Core.Application.Enums;
+@using Microsoft.AspNetCore.Http
+@using RealStateApp.Core.Application.Dtos.Account
+@using RealStateApp.Core.Application.Helpers;
+@using RealStateApp.Core.Application.ViewModels.User;
+@inject IHttpContextAccessor httpContextAccessor
+@{
+    var User = httpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
+}
+
+@{
+    bool EditMode = Model.id == 0 ? false : true;
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-light">
+                   <h4> @(EditMode ? "Editar" : "Crear") Imagen</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-body">
+                        @Html.ValidationSummary(false, "", new{@class = "text-danger" })
+                        @if (Model.HasError)
+                        {
+                            <div class="alert alert-danger alert-dimissible fade show" role="alert">
+                                <p>@Model.ErrorDetails</p>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dimiss="alert" aria-label="Close"></button>
+
+                        }
+
+                        <form id="Formulario" enctype="multipart/form-data" method="post" asp-controller="Agent" asp-action="@(EditMode?"EditImage":"CreateImage")">
+
+                          
+                            <div class="mb-3">
+                                <label for="foto" class="form-label">Foto Nueva: </label>
+                                <input type="file" asp-for="file" class="form-control" id="foto">
+                            </div>  
+
+                            <input type="hidden" asp-for="id">
+                            <input type="hidden" asp-for="IdPropiedad">
+
+                            <button type="submit" class="btn btn-primary">Dale</button>
+                            <a asp-controller="Agent" asp-action="PropertyMantainment" class="btn btn-warning">Atrás</a>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
